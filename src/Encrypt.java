@@ -50,15 +50,13 @@ public class Encrypt extends Configured implements Tool {
         
         FileSystem fs = FileSystem.get(conf);
         
-        InputStream is = new BufferedInputStream(new FileInputStream(localInputPath));
-        
-        OutputStream os = fs.create(outputPath);
-        
         if (fs.exists(outputPath)) {
             System.err.println("Output path exists!");
-            is.close();
             return 1;
         }
+        
+        InputStream is = new BufferedInputStream(new FileInputStream(localInputPath));
+        OutputStream os = fs.create(outputPath);
         
         System.out.println("\nKuber encryption started!\n");
         
